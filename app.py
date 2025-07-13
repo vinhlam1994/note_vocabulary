@@ -15,7 +15,8 @@ app.config['UPLOAD_FOLDER'] = 'static/audio'
 
 from extensions import db
 db.init_app(app)
-
+with app.app_context():
+    db.create_all()
 from models import Vocabulary
 
 # Ensure audio folder exists
@@ -140,7 +141,8 @@ def export_excel():
     return send_from_directory('.', 'vocab.xlsx', as_attachment=True)
 
 
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run()
