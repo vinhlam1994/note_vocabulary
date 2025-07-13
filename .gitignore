@@ -1,0 +1,9 @@
+# Bỏ qua file log
+*.log
+
+# Bỏ qua file cấu hình cục bộ
+.env
+.DS_Store
+
+# Bỏ qua thư mục build hoặc dist
+note_venv/

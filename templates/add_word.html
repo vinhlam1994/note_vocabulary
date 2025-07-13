@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>➕ Add New Word</h2>
+
+<form method="POST" class="word-form">
+    <label>Word*:</label>
+    <input type="text" name="word" required>
+
+    <label>Type*:</label>
+    <input type="text" name="word_type" placeholder="e.g., noun, verb..." required>
+
+    <label>Phonetic:</label>
+    <input type="text" name="phonetic" placeholder="/wɜːd/">
+
+    <label>Meaning (Vietnamese)*:</label>
+    <textarea name="meaning_vi" required></textarea>
+
+    <label>Meaning (English):</label>
+    <textarea name="meaning_en"></textarea>
+
+    <label>Note:</label>
+    <textarea name="note"></textarea>
+
+    <label>Tag:</label>
+    <input type="text" name="tag" placeholder="e.g., travel, academic">
+
+    <button type="submit">💾 Save</button>
+</form>
+
+<p><a href="{{ url_for('index') }}">← Back to list</a></p>
+{% endblock %}

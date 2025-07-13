@@ -1,0 +1,6 @@
+Flask
+Flask-SQLAlchemy
+gTTS
+pandas
+openpyxl
+psycopg2-binary

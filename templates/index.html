@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>📖 Your Vocabulary List</h2>
+
+<form method="get" class="search-bar">
+    <input type="text" name="search" placeholder="Search word..." value="{{ search }}">
+    <button type="submit">🔍</button>
+</form>
+<div style="margin-top: 10px;">
+    <a href="{{ url_for('export_csv') }}" class="export-button">⬇️ Export CSV</a>
+    <a href="{{ url_for('export_excel') }}" class="export-button">⬇️ Export Excel</a>
+    <a href="{{ url_for('index') }}" class="reset-button export-button">🔄 Reset Filter</a>
+</div>
+<div class="filter-bar">
+    <strong>Filter by letter:</strong>
+    {% for letter in letters %}
+    <a href="{{ url_for('index', letter=letter) }}" class="letter-filter">{{ letter }}</a>
+    {% endfor %}
+</div>
+
+<div class="filter-tag">
+    <strong>Filter by tag:</strong>
+    {% for t in tags %}
+    <a href="{{ url_for('index', tag=t[0]) }}" class="tag-filter">{{ t[0] }}</a>
+    {% endfor %}
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Word</th>
+            <th>Type</th>
+            <th>Phonetic</th>
+            <th>Meaning (VI)</th>
+            <th>Meaning (EN)</th>
+            <th>Tag</th>
+            <th>Note</th>
+            <th>Pronounce</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for word in words %}
+        <tr>
+            <td>{{ word.word }}</td>
+            <td>{{ word.word_type }}</td>
+            <td>{{ word.phonetic }}</td>
+            <td>{{ word.meaning_vi }}</td>
+            <td>{{ word.meaning_en }}</td>
+            <td>{{ word.tag }}</td>
+            <td>{{ word.note }}</td>
+            <td>
+                <audio controls>
+                    <source src="{{ url_for('audio', word_id=word.id) }}" type="audio/mpeg">
+                </audio>
+            </td>
+            <td>
+                <a href="{{ url_for('edit_word', word_id=word.id) }}">✏️</a>
+                <a href="{{ url_for('delete_word', word_id=word.id) }}"
+                    onclick="return confirm('Delete this word?')">🗑️</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
