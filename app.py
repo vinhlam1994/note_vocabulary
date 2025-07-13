@@ -14,10 +14,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/audio'
 
 from extensions import db
+
 db.init_app(app)
+
+from models import Vocabulary
+
 with app.app_context():
     db.create_all()
-from models import Vocabulary
 
 # Ensure audio folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -145,4 +148,4 @@ def export_excel():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run()
+    app.run(debug=False)
