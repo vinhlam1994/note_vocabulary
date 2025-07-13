@@ -8,7 +8,7 @@ import os
 import string
 
 app = Flask(__name__)
-DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///vocab.db')
+# DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///vocab.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/audio'
